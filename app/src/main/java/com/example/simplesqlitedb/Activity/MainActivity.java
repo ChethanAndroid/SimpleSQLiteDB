@@ -11,13 +11,22 @@ import com.example.simplesqlitedb.DataBase.BaseHelper;
 import com.example.simplesqlitedb.DataBase.BasePojo;
 import com.example.simplesqlitedb.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText name,age,dept,gender;
-    Button submit,next,delete;
+    Button submit,next,delete,update;
 
     BasePojo basePojo;
     BaseHelper baseHelper;
+
+    List<BasePojo> NamePojoList = new ArrayList<>();
+
+    Boolean isUpdate = false;
+
+    String updateName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,27 +41,54 @@ public class MainActivity extends AppCompatActivity {
         submit = findViewById(R.id.btn_submit);
         next = findViewById(R.id.btn_next);
         delete = findViewById(R.id.btn_delete);
+//        update = findViewById(R.id.update);
 
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(!isUpdate){
 
-                basePojo = new BasePojo();
+                    basePojo = new BasePojo();
 
-                basePojo.setName(name.getText().toString());
-                basePojo.setAge(age.getText().toString());
-                basePojo.setGend(gender.getText().toString());
-                basePojo.setDept(dept.getText().toString());
+                    basePojo.setName(name.getText().toString());
+                    basePojo.setAge(age.getText().toString());
+                    basePojo.setGend(gender.getText().toString());
+                    basePojo.setDept(dept.getText().toString());
 
-                baseHelper = new BaseHelper(MainActivity.this);
-                baseHelper.ADDToDB(basePojo);
+                    baseHelper = new BaseHelper(MainActivity.this);
+                    baseHelper.ADDToDB(basePojo);
 
-                name.setText("");
-                age.setText("");
-                dept.setText("");
-                gender.setText("");
+                    name.setText("");
+                    age.setText("");
+                    dept.setText("");
+                    gender.setText("");
+
+                }else {
+
+
+
+
+
+                    basePojo = new BasePojo();
+
+                    basePojo.setName(name.getText().toString());
+                    basePojo.setAge(age.getText().toString());
+                    basePojo.setGend(gender.getText().toString());
+                    basePojo.setDept(dept.getText().toString());
+
+                    baseHelper = new BaseHelper(MainActivity.this);
+                    baseHelper.update(updateName,basePojo);
+
+                    name.setText("");
+                    age.setText("");
+                    dept.setText("");
+                    gender.setText("");
+
+                }
+
+
 
 
 
@@ -80,6 +116,46 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        if (getIntent().getBooleanExtra("update",false)){
+
+            System.out.println("Update");
+
+            submit.setText("Update");
+
+            submit.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+            System.out.println("GetName:"+ValuesPojo.getSname());
+
+            baseHelper = new BaseHelper(MainActivity.this);
+            NamePojoList = baseHelper.FetchByName(ValuesPojo.getSname());
+
+            for (BasePojo pojo:NamePojoList){
+
+                name.setText(pojo.getName());
+                age.setText(pojo.getAge());
+                gender.setText(pojo.getGend());
+                dept.setText(pojo.getDept());
+
+                updateName = pojo.getName();
+
+                isUpdate =true;
+
+                System.out.println("update:"+updateName);
+            }
+
+        }else {
+            isUpdate=false;
+
+            submit.setText("Submit");
+
+            submit.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+            System.out.println("Pain");
+        }
+
+
+
 
     }
 }
