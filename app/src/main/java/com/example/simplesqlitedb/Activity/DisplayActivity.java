@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.simplesqlitedb.DataBase.BaseHelper;
@@ -90,6 +92,11 @@ public class DisplayActivity extends AppCompatActivity {
         protected void onPreExecute() {
 //            super.onPreExecute();
             progressDialog = ProgressDialog.show(DisplayActivity.this,"Loading","Please Wait",true);
+
+            NameList.clear();
+            AgeList.clear();
+            DeptList.clear();
+            GenderList.clear();
         }
 
 
@@ -162,12 +169,41 @@ public class DisplayActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AdHolder adHolder, int position) {
+        public void onBindViewHolder(@NonNull AdHolder adHolder, final int position) {
 
             adHolder.name.setText(NameList.get(position));
             adHolder.age.setText(AgeList.get(position));
             adHolder.gend.setText(GenderList.get(position));
             adHolder.dept.setText(DeptList.get(position));
+
+            adHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    baseHelper = new BaseHelper(DisplayActivity.this);
+                    baseHelper.deleteByName(NameList.get(position));
+
+                    new GetDetailsFromSQLiteDb().execute();
+
+                }
+            });
+
+            adHolder.mainLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    ValuesPojo.setSname(NameList.get(position));
+
+                    Intent intent = new Intent(DisplayActivity.this,MainActivity.class);
+                    intent.putExtra("update",true);
+                    startActivity(intent);
+                    overridePendingTransition(0,0);
+                    finish();
+
+                }
+            });
+
 
         }
 
@@ -179,6 +215,8 @@ public class DisplayActivity extends AppCompatActivity {
         public class AdHolder extends RecyclerView.ViewHolder{
 
             TextView name,age,dept,gend;
+            LinearLayout mainLayout;
+            ImageView imageView;
 
             public AdHolder(@NonNull View itemView) {
                 super(itemView);
@@ -187,6 +225,9 @@ public class DisplayActivity extends AppCompatActivity {
                 age = itemView.findViewById(R.id.text_age);
                 gend = itemView.findViewById(R.id.text_gen);
                 dept = itemView.findViewById(R.id.text_dept);
+
+                mainLayout = itemView.findViewById(R.id.mainLay_id);
+                imageView = itemView.findViewById(R.id.delete_id);
             }
         }
     }

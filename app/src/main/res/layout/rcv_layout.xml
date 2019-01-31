@@ -5,92 +5,140 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.CardView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/holo_blue_light"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_marginTop="10dp">
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+        android:background="@drawable/border_color"
+        >
 
         <LinearLayout
+            android:id="@+id/mainLay_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="0.2"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
 
+            >
 
-            <TextView
-                android:id="@+id/text_name"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text=""
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/white"/>
-            <TextView
-                android:id="@+id/text_age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text=""
-                />
+                app:cardBackgroundColor="@android:color/holo_blue_light"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/white"/>
 
-            <TextView
-                android:id="@+id/text_gen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/white"/>
 
-            <TextView
-                android:id="@+id/text_dept"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                />
+                    <TextView
+                        android:id="@+id/text_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text=""
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/white"/>
+                    <TextView
+                        android:id="@+id/text_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text=""
+                        />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/white"/>
+
+                    <TextView
+                        android:id="@+id/text_gen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/white"/>
+
+                    <TextView
+                        android:id="@+id/text_dept"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        />
+
+
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
 
 
         </LinearLayout>
 
 
-    </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+
+            <ImageView
+                android:id="@+id/delete_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_delete"
+                android:scaleType="fitCenter"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
